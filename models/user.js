@@ -101,9 +101,9 @@ class User {
 
             users.map(u => {
 
-                if (u._id === this.id) {
+                if (u._id == this.id) {
 
-                    u = this;
+                    Object.assign(u, this);
 
                 }
 
@@ -124,6 +124,24 @@ class User {
 
 
         }
+
+        localStorage.setItem("users", JSON.stringify(users));
+
+    }
+
+    remove() {
+
+        let users = User.getUsersStorage();
+
+        users.forEach((userData, index) => {
+
+            if (this._id == userData._id) {
+
+                users.splice(index, 1);
+
+            }
+
+        });
 
         localStorage.setItem("users", JSON.stringify(users));
 
